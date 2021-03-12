@@ -39,7 +39,6 @@ int main()
         {"Two", test2},
         {"Two", test2},
         {"Two", test2}
-
     };
 
     FAS::CMenu menu("Menu", list, 10);
@@ -68,7 +67,7 @@ int main()
 
         case 32:
             system("cls");
-            std::cout << menu.GetItems()[menu.GetSelect()].run() << std::endl;
+            menu.runCommand();
             system("pause");
             break;
 
