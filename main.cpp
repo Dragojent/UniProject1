@@ -12,18 +12,6 @@ int test2()
     return 2;
 }
 
-void PrintMenu(FAS::CMenu* menu)
-{
-    for (int i = 0; i < menu->GetNumberOfItems(); i++)
-    {
-        if (i == menu->GetSelect())
-        {
-            std::cout << ">";
-        }
-        std::cout << menu->GetItems()[i].GetName() << std::endl;
-    }
-}
-
 int main()
 {
     typedef char key;
