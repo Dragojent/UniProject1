@@ -1,6 +1,7 @@
 #include <iostream>
 #include "stdlib.h"
 #include "CMenu.h"
+#include "User.h"
 
 int test()
 {
@@ -14,7 +15,23 @@ int test2()
 
 int main()
 {
-    typedef char key;
+    FAS::User newUser("name", FAS::User::AccessLevel::user);
+
+    FAS::MenuItem _list[10]{
+        {"Onegf", test},
+        {"Two", test2},
+        {"One", test},
+        {"One", test},
+        {"One", test},
+        {"One", test},
+        {"Two", test2},
+        {"Two", test2},
+        {"Two", test2},
+        {"Two", test2}
+    };
+
+    FAS::CMenu _menu("Menu", _list, 10);
+
     FAS::MenuItem list[10]{
         {"One", test},
         {"Two", test2},

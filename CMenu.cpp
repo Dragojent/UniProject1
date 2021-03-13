@@ -122,3 +122,9 @@ void FAS::CMenu::MoveSelect(int shift)
     else if (m_select >= m_count)
         m_select -= m_count;
 }
+
+std::ostream& operator<<(std::ostream& out, FAS::CMenu& sum)  
+{
+    sum.print();
+    return out;
+}

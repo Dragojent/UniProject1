@@ -2,7 +2,8 @@
 
 namespace FAS
 {
-    class MenuItem {
+    class MenuItem 
+    {
         public:
             typedef int(*Func)();
 

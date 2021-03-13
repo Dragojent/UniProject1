@@ -1,3 +1,4 @@
+#include <iostream>
 #pragma once
 
 #include <cstdio>
@@ -5,7 +6,8 @@
         
 namespace FAS
 {
-    class CMenu {
+    class CMenu 
+    {
         public:
             CMenu(const char* title, FAS::MenuItem* items, std::size_t count);
             CMenu(CMenu& copy);
@@ -24,6 +26,10 @@ namespace FAS
             void print();
             void runCommand();
             void Start();
+
+            // std::ostream& operator<<(std::ostream& out, const CMenu& sum);
+
+            //[cin], user, picture, album, app.cpp, 
 
         private:
             int m_select = -1;
