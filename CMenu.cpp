@@ -1,4 +1,5 @@
 #include "CMenu.h"
+#include <conio.h> 
 #include <cstring>
 #include <iostream>
 
@@ -53,7 +54,47 @@ void FAS::CMenu::print()
 {
     for (int i = 0; i < m_count; i++)
     {
-        m_item[i].PrintName();
+        if (i == m_select)
+        {
+            std::cout << ">";
+        }
+        std::cout << m_item[i].GetName() << std::endl;
+    }
+}
+
+void FAS::CMenu::Start()
+{
+    this->SetSelect(0);
+    this->SetRunning(true);
+    while (m_running)
+    {
+        system("cls");
+        this->print();
+        char input{};
+        input = getch();
+        switch (input)
+        {
+        case 's':
+            this->MoveSelect(1);
+            break;
+        
+        case 'w':
+            this->MoveSelect(-1);
+            break;
+
+        case 27:
+            this->SetRunning(false);
+            break;
+
+        case 32:
+            system("cls");
+            this->runCommand();
+            system("pause");
+            break;
+
+        default:
+            break;
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "stdlib.h"
-#include <conio.h> 
 #include "CMenu.h"
 
 int test()
@@ -42,39 +41,8 @@ int main()
     };
 
     FAS::CMenu menu("Menu", list, 10);
-    key input{};
 
-    menu.SetSelect(0);
-    menu.SetRunning(true);
-    while (menu.IsRunning())
-    {
-        system("cls");
-        PrintMenu(&menu);
-        input = getch();
-        switch (input)
-        {
-        case 's':
-            menu.MoveSelect(1);
-            break;
-        
-        case 'w':
-            menu.MoveSelect(-1);
-            break;
-
-        case 27:
-            menu.SetRunning(false);
-            break;
-
-        case 32:
-            system("cls");
-            menu.runCommand();
-            system("pause");
-            break;
-
-        default:
-            break;
-        }
-    }
+    menu.Start();
 
     return 0;
 }

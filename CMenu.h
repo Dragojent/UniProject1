@@ -23,6 +23,7 @@ namespace FAS
 
             void print();
             void runCommand();
+            void Start();
 
         private:
             int m_select = -1;
