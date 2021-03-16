@@ -11,6 +11,7 @@ namespace FAS
         public:
             CMenu(const char* title, FAS::MenuItem* items, std::size_t count);
             CMenu(CMenu& copy);
+            CMenu();
             ~CMenu();
 
             void SetRunning(bool setTo);

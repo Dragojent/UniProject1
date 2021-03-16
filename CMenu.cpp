@@ -20,6 +20,11 @@ FAS::CMenu::CMenu(CMenu& copy)
     m_select = copy.m_select;
 }
 
+FAS::CMenu::CMenu()
+{
+    m_title = new char[4096];
+}
+
 FAS::CMenu::~CMenu()
 {
     delete[] m_title;
@@ -100,7 +105,7 @@ void FAS::CMenu::Start()
 
 void FAS::CMenu::runCommand()
 {
-    std::cout << m_item[GetSelect()].run() << std::endl;
+    m_item[GetSelect()].run();
 }
 
 void FAS::CMenu::SetRunning(bool setTo)

@@ -16,6 +16,11 @@ FAS::MenuItem::MenuItem(const char* name, FAS::MenuItem::Func action)
     m_func = action;
 }
 
+FAS::MenuItem::MenuItem()
+{
+    m_item_name = new char[1024]{};
+}
+
 FAS::MenuItem::~MenuItem()
 {
     delete[] m_item_name;
@@ -31,7 +36,7 @@ void FAS::MenuItem::PrintName()
     std::cout << FAS::MenuItem::GetName() << std::endl;
 }
 
-int FAS::MenuItem::run()
+void FAS::MenuItem::run()
 {
     return m_func();
 }

@@ -3,14 +3,21 @@
 #include "CMenu.h"
 #include "User.h"
 
-int test()
+FAS::CMenu currentMenu{};
+
+void test()
 {
-    return 1;
+    std::cout << 1 << std::endl;
 }
 
-int test2()
+void test2()
 {
-    return 2;
+    std::cout << 2 << std::endl;
+}
+
+void ExecMenu()
+{
+    currentMenu.Start();
 }
 
 int main()
@@ -31,9 +38,10 @@ int main()
     };
 
     FAS::CMenu _menu("Menu", _list, 10);
+    currentMenu = _menu;
 
     FAS::MenuItem list[10]{
-        {"One", test},
+        {"One", ExecMenu},
         {"Two", test2},
         {"One", test},
         {"One", test},

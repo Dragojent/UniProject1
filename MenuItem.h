@@ -5,15 +5,16 @@ namespace FAS
     class MenuItem 
     {
         public:
-            typedef int(*Func)();
+            typedef void(*Func)();
 
             MenuItem(const char* name, Func action);
             MenuItem(MenuItem& copy);
+            MenuItem();
             ~MenuItem();
 
             char* GetName();
             void PrintName();
-            int run();
+            void run();
 
         private:
             char* m_item_name = nullptr;
