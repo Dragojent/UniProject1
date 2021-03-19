@@ -1,3 +1,4 @@
+#include "MenuItem.h"
 #include "myArray.h"
 #include <algorithm>
 #include <iostream>
@@ -25,14 +26,12 @@ void FAS::myArray<T>::push(T data)
 {
     if (currentSize == totalSize)
     {
-        T* tmp = new T[2 * totalSize];
-        std::copy(content, content + currentSize, tmp);
-        delete[] content;
-        totalSize *= 2;
-        content = tmp;
+        T* old = content;
+        content = new T[totalSize*=2];
+        std::copy(old, old + currentSize, content);
+        delete[] old;
     }
-    content[currentSize] = data;
-    currentSize++;
+    content[currentSize++] = data;
 }
 
 template <class T>
@@ -75,5 +74,15 @@ FAS::myArray<T>::~myArray()
     delete[] content;
 }
 
+template <class T>
+T& FAS::myArray<T>::operator[](const int index)
+{
+    return content[index];
+}
+
 
 template class FAS::myArray<int>;
+template class FAS::myArray<float>;
+template class FAS::myArray<char>;
+template class FAS::myArray<double>;
+template class FAS::myArray<FAS::MenuItem>;
