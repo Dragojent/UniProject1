@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 namespace FAS
 {
@@ -12,10 +13,16 @@ namespace FAS
             MenuItem();
             ~MenuItem();
 
-            char* GetName();
-            void PrintName();
+            char* GetName() const;
+            void PrintName() const;
             void run();
 
+            friend std::ostream& operator<<(std::ostream& out, const MenuItem& sum)
+            {
+                sum.PrintName();
+                return out;
+            }
+ 
         private:
             char* m_item_name = nullptr;
             Func m_func = nullptr;

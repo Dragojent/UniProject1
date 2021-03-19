@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "MenuItem.h"
 #include <initializer_list>
 
@@ -15,12 +16,14 @@ namespace FAS
         const T* begin();
         const T* end();
         void push(T data);
-        void push(T data, unsigned int index);
+        void place(T data, unsigned int index);
         T pop();
         T get(unsigned int index);
         int getSize();
         T* getAll();
         void print();
+
+        T& operator[](const int index);
 
     private:
        T *content = nullptr;

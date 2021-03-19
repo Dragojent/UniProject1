@@ -23,13 +23,13 @@ void ExecMenu()
 
 int main()
 {
-    FAS::myArray<int> arr{1, 2, 3, 4, 5};
-    arr.push(6);
-    for (int i = 0; i < 6; i++)
-    {
-        std::cout << arr.pop() << std::endl;
-    }
-    arr.print();
+    FAS::MenuItem tmp("item", test), tmp1("item2", test2), tmp2("item3", test);
+
+    FAS::myArray<FAS::MenuItem> arr;
+    arr.push(tmp);
+    arr.push(tmp1);
+    arr.pop().PrintName();
+
     system("pause");
     // FAS::User newUser("name", FAS::User::AccessLevel::user);
 

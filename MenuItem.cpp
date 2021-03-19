@@ -26,12 +26,12 @@ FAS::MenuItem::~MenuItem()
     delete[] m_item_name;
 }
 
-char* FAS::MenuItem::GetName()
+char* FAS::MenuItem::GetName() const
 {
     return m_item_name;
 }
 
-void FAS::MenuItem::PrintName()
+void FAS::MenuItem::PrintName() const
 {
     std::cout << FAS::MenuItem::GetName() << std::endl;
 }
@@ -40,3 +40,9 @@ void FAS::MenuItem::run()
 {
     return m_func();
 }
+
+// std::ostream& operator<<(std::ostream& out, FAS::MenuItem& sum)
+// {
+//     sum.PrintName();
+//     return out;
+// }
