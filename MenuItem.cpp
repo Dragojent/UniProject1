@@ -41,6 +41,13 @@ void FAS::MenuItem::run()
     return m_func();
 }
 
+FAS::MenuItem& FAS::MenuItem::operator=(const FAS::MenuItem &item)
+{
+    strcpy(m_item_name, item.m_item_name);
+    m_func = item.m_func;
+    return *this;
+}
+
 // std::ostream& operator<<(std::ostream& out, FAS::MenuItem& sum)
 // {
 //     sum.PrintName();

@@ -23,12 +23,14 @@ void ExecMenu()
 
 int main()
 {
-    FAS::MenuItem tmp("item", test), tmp1("item2", test2), tmp2("item3", test);
+    FAS::MenuItem tmp("item", test), tmp1("item2", test2), tmp2("item3", test), tmp3("item4", test2);
 
     FAS::myArray<FAS::MenuItem> arr;
     arr.push(tmp);
     arr.push(tmp1);
-    arr.pop().PrintName();
+    arr.push(tmp2);
+    arr.place(tmp3, 2);
+    arr.print();
 
     system("pause");
     // FAS::User newUser("name", FAS::User::AccessLevel::user);

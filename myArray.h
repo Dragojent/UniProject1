@@ -24,10 +24,12 @@ namespace FAS
         void print();
 
         T& operator[](const int index);
+        myArray& operator=(const myArray &data);
 
     private:
-       T *content = nullptr;
-       unsigned int currentSize = 0;
-       unsigned int totalSize = 0;
+        void allocateMoreMemory();
+        T *content = nullptr;
+        unsigned int currentSize = 0;
+        unsigned int totalSize = 0;
     };
 }

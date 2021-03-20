@@ -22,6 +22,7 @@ namespace FAS
                 sum.PrintName();
                 return out;
             }
+            MenuItem& operator=(const MenuItem &item);
  
         private:
             char* m_item_name = nullptr;

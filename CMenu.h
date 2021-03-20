@@ -1,7 +1,8 @@
-#include <iostream>
 #pragma once
 
+#include <iostream>
 #include <cstdio>
+#include "myArray.h"
 #include "MenuItem.h"
         
 namespace FAS
