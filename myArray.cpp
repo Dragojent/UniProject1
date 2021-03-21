@@ -22,6 +22,15 @@ FAS::myArray<T>::myArray(std::initializer_list<T> list)
 }
 
 template <class T>
+FAS::myArray<T>::myArray(myArray<T> &copy)
+{
+    content = new T[copy.currentSize];
+    std::copy(copy.content, copy.content + copy.currentSize, content);
+    currentSize = copy.currentSize;
+    totalSize = copy.totalSize;
+}
+
+template <class T>
 void FAS::myArray<T>::push(T data)
 {
     if (currentSize == totalSize)
@@ -91,7 +100,7 @@ T& FAS::myArray<T>::operator[](const int index)
 template <class T>
 FAS::myArray<T>& FAS::myArray<T>::operator=(const FAS::myArray<T> &data)
 {
-    content = data.content;
+    std::copy(data.content, data.content + data.currentSize, content);
     currentSize = data.currentSize;
     totalSize = data.totalSize;
     return *this;

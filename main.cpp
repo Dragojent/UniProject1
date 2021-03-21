@@ -23,50 +23,19 @@ void ExecMenu()
 
 int main()
 {
-    FAS::MenuItem tmp("item", test), tmp1("item2", test2), tmp2("item3", test), tmp3("item4", test2);
-
-    FAS::myArray<FAS::MenuItem> arr;
-    arr.push(tmp);
-    arr.push(tmp1);
-    arr.push(tmp2);
-    arr.place(tmp3, 2);
-    arr.print();
-
-    system("pause");
     // FAS::User newUser("name", FAS::User::AccessLevel::user);
 
-    // FAS::MenuItem _list[10]{
-    //     {"Onegf", test},
-    //     {"Two", test2},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"Two", test2},
-    //     {"Two", test2},
-    //     {"Two", test2},
-    //     {"Two", test2}
-    // };
+    FAS::myArray<FAS::MenuItem> list{
+        {"one", test},
+        {"two", test2},
+        {"three", test}
+    };
 
-    // FAS::CMenu _menu("Menu", _list, 10);
-    // currentMenu = _menu;
+    list.print();
 
-    // FAS::MenuItem list[10]{
-    //     {"One", ExecMenu},
-    //     {"Two", test2},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"One", test},
-    //     {"Two", test2},
-    //     {"Two", test2},
-    //     {"Two", test2},
-    //     {"Two", test2}
-    // };
+    FAS::CMenu menu("Menu", list, 2);
 
-    // FAS::CMenu menu("Menu", list, 10);
-
-    // menu.Start();
+    menu.Start();
 
     return 0;
 }

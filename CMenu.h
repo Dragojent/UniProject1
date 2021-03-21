@@ -10,7 +10,7 @@ namespace FAS
     class CMenu 
     {
         public:
-            CMenu(const char* title, FAS::MenuItem* items, std::size_t count);
+            CMenu(const char* title, FAS::myArray<FAS::MenuItem> items, std::size_t count);
             CMenu(CMenu& copy);
             CMenu();
             ~CMenu();
@@ -23,7 +23,7 @@ namespace FAS
             bool IsRunning();
             char* GetTitle();
             size_t GetNumberOfItems();
-            FAS::MenuItem* GetItems();
+            FAS::myArray<FAS::MenuItem> GetItems();
 
             void print();
             void runCommand();
@@ -38,6 +38,6 @@ namespace FAS
             bool m_running = false;
             char* m_title = nullptr;
             size_t m_count = 0;
-            FAS::MenuItem *m_item = nullptr;
+            FAS::myArray<FAS::MenuItem> m_item;
     };
 }

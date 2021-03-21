@@ -10,6 +10,7 @@ namespace FAS
     public:
 
         myArray(std::initializer_list<T> list);
+        myArray(myArray &copy);
         myArray();
         ~myArray();
 

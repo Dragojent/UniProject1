@@ -33,7 +33,7 @@ char* FAS::MenuItem::GetName() const
 
 void FAS::MenuItem::PrintName() const
 {
-    std::cout << FAS::MenuItem::GetName() << std::endl;
+    std::cout << m_item_name << std::endl;
 }
 
 void FAS::MenuItem::run()

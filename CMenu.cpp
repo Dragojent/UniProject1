@@ -3,7 +3,7 @@
 #include <cstring>
 #include <iostream>
 
-FAS::CMenu::CMenu(const char* title, FAS::MenuItem* items, std::size_t count)
+FAS::CMenu::CMenu(const char* title, FAS::myArray<FAS::MenuItem> items, std::size_t count)
 {
     m_title = new char[sizeof(FAS::MenuItem) * count + 256]{};
     strcpy(m_title, title);
@@ -50,20 +50,21 @@ size_t FAS::CMenu::GetNumberOfItems()
     return m_count;
 }
 
-FAS::MenuItem* FAS::CMenu::GetItems()
+FAS::myArray<FAS::MenuItem> FAS::CMenu::GetItems()
 {
     return m_item;
 }
 
 void FAS::CMenu::print()
 {
+    m_item.print();
     for (int i = 0; i < m_count; i++)
     {
         if (i == m_select)
         {
             std::cout << ">";
         }
-        std::cout << m_item[i].GetName() << std::endl;
+        m_item[i].PrintName();
     }
 }
 
