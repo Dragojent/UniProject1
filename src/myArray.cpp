@@ -97,6 +97,13 @@ FAS::myArray<T>& FAS::myArray<T>::operator=(const FAS::myArray<T> &data)
 {
     if (data.content == nullptr)
         throw "Access Error: null reference";
+    if (currentSize < data.currentSize)
+    {
+        T* old = content;
+        content = new T[data.currentSize];
+        std::copy(old, old + currentSize, content);
+        delete[] old;
+    }
     std::copy(data.content, data.content + data.currentSize, content);
     currentSize = data.currentSize;
     totalSize = data.totalSize;

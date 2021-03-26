@@ -26,12 +26,18 @@ int main()
         {"three", test}
     };
 
-    list.print();
+    // list.print();
 
+    FAS::myArray<FAS::MenuItem> listnew{
+        {"new", test2}
+    };
 
-    debug(FAS::CMenu menu("Menu", list, 2))
+    listnew = list;
+    // listnew.print();
 
-    // menu.Start();
+    FAS::CMenu menu("Menu", list, 3);
+
+    menu.Start();
 
     system("pause");
     return 0;

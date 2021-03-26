@@ -57,7 +57,6 @@ FAS::myArray<FAS::MenuItem> FAS::CMenu::GetItems()
 
 void FAS::CMenu::print()
 {
-    m_item.print();
     for (int i = 0; i < m_count; i++)
     {
         if (i == m_select)
@@ -70,8 +69,8 @@ void FAS::CMenu::print()
 
 void FAS::CMenu::Start()
 {
-    this->SetSelect(0);
-    this->SetRunning(true);
+    m_select = 0;
+    m_running = 1;
     while (m_running)
     {
         system("cls");
