@@ -15,7 +15,7 @@ namespace FAS
 
             char* GetName() const;
             void PrintName() const;
-            void run();
+            virtual void run();
 
             friend std::ostream& operator<<(std::ostream& out, const MenuItem& sum)
             {
@@ -24,7 +24,7 @@ namespace FAS
             }
             MenuItem& operator=(const MenuItem &item);
  
-        private:
+        protected:
             char* m_item_name = nullptr;
             Func m_func = nullptr;
     };

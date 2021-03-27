@@ -29,10 +29,6 @@ namespace FAS
             void runCommand();
             void Start();
 
-            // std::ostream& operator<<(std::ostream& out, const CMenu& sum);
-
-            //[cin], user, picture, album, app.cpp, 
-
         private:
             int m_select = -1;
             bool m_running = false;
