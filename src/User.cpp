@@ -44,3 +44,15 @@ void FAS::User::SetName(const char* setTo)
 {
     strcpy(name, setTo);
 }
+
+FAS::User& FAS::User::operator=(const User& user)
+{
+    strcpy(name, user.name);
+    accessLevel = user.accessLevel;
+}
+
+std::ostream& FAS::operator<<(std::ostream& out, const FAS::User& sum)
+{
+    std::cout << sum.name << std::endl;
+    return out;
+}

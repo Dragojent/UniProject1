@@ -5,7 +5,7 @@
 FAS::MenuItem::MenuItem(MenuItem& copy)
 {
     m_item_name = new char[1024]{};
-    strcpy(m_item_name, copy.GetName());
+    strcpy(m_item_name, copy.m_item_name);
     m_func = copy.m_func;
 }
 
@@ -33,7 +33,7 @@ char* FAS::MenuItem::GetName() const
 
 void FAS::MenuItem::PrintName() const
 {
-    std::cout << m_item_name << std::endl;
+    std::cout << m_item_name << std::endl;;
 }
 
 void FAS::MenuItem::run()

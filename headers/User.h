@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 namespace FAS
 {
@@ -22,9 +23,12 @@ namespace FAS
             void SetName(const char* setTo);
             void SetAccessLevel(AccessLevel setTo);
 
+            User& operator=(const User& user);
+            friend std::ostream& operator<<(std::ostream& out, const User& sum);
         private:
 
             char* name{}; 
             AccessLevel accessLevel = AccessLevel::user;
     };
+    std::ostream& operator<<(std::ostream& out, const User& sum);
 }

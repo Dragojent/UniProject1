@@ -21,30 +21,40 @@ void test2()
 
 int main()
 {
-    FAS::myArray<char*> people{
-        {"Tim"},
-        {"Kate"}
+    FAS::myArray<FAS::User> people{
+        {"Tim", FAS::User::AccessLevel::user},
+        {"Kate", FAS::User::AccessLevel::user}
     };
 
-    system("pause");
+    FAS::myArray<FAS::User> peopleNew{
+        {"Roy", FAS::User::AccessLevel::user},
+        {"Jake", FAS::User::AccessLevel::admin}
+    };
 
-    // FAS::Photo photo("lfd", "ff", people);
+    FAS::myArray<FAS::Photo> album{
+        {"vacation", "__~~~__", people},
+        {"vacation1", "__~+~__", people},
+        {"vacation2", "__~-~__", people},
+        {"vacation3", "__~*~__", people},
+        {"School", "|__*__|", peopleNew},
+        {"School1", "|__+__|", peopleNew},
+        {"School2", "|__!__|", peopleNew},
+    };
 
-    for (int i = 0; i < 3000; i++)
+    //Album.print prototype
+    for (FAS::Photo photo : album)
     {
-        FAS::myArray<FAS::Photo> photos{
-            {"vacation", "__~~~__", people},
-            {"vacation1", "__~+~__", people},
-            {"vacation2", "__~-~__", people}
-        };
-        // if (i % 100 == 0)
-        //     system("pause");
+        photo.PrintName();
+        photo.View();
+        //Photo.printUsers prototype
+        for (FAS::User user : photo.GetPeople())
+        {
+            std::cout << user;
+        }
+        std::cout << "---------" << std::endl;
     }
 
-
     system("pause");
-    // photos.print();
-
 
     return 0;
 }

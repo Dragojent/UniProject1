@@ -87,6 +87,18 @@ FAS::myArray<T>::~myArray()
 }
 
 template <class T>
+T* FAS::myArray<T>::begin()
+{
+    return &content[0];
+}
+
+template <class T>
+T* FAS::myArray<T>::end()
+{
+    return &content[currentSize];
+}
+
+template <class T>
 T& FAS::myArray<T>::operator[](const unsigned int index)
 {
     if (index >= currentSize)
@@ -130,3 +142,4 @@ template class FAS::myArray<char*>;
 template class FAS::myArray<FAS::Photo>;
 template class FAS::myArray<FAS::Album>;
 template class FAS::myArray<FAS::MenuItem>;
+template class FAS::myArray<FAS::User>;

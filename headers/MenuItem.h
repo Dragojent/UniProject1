@@ -26,6 +26,7 @@ namespace FAS
  
         protected:
             char* m_item_name = nullptr;
+        private:
             Func m_func = nullptr;
     };
 }

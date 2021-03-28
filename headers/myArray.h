@@ -14,13 +14,14 @@ namespace FAS
         myArray();
         ~myArray();
 
-        const T* begin();
-        const T* end();
         unsigned int push(T data);
         void place(T data, unsigned int index);
         T pop();
         int getSize();
         void print();
+
+        T* begin();
+        T* end();
 
         T& operator[](const unsigned int index);
         myArray& operator=(const myArray &data);

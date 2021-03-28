@@ -1,6 +1,7 @@
 #pragma once
 #include "MenuItem.h"
 #include "myArray.h"
+#include "User.h"
 
 namespace FAS
 {
@@ -8,18 +9,20 @@ namespace FAS
     {
         public:
             Photo(const char* name, const char* _content);
-            Photo(const char* name, const char* _content, myArray<char*> _people);
+            Photo(const char* name, const char* _content, myArray<User> _people);
             Photo(Photo& copy);
             Photo();
             ~Photo();
 
-            void Print();
-            myArray<char*> GetPeople();
+            void View();
+            myArray<User> GetPeople();
             void SetPeople();
             void AddPeople();
             void Edit();
+
+            Photo& operator=(const Photo& item);
         private:
-            myArray<char*> people;
+            myArray<User> people;
             char* content;
     };
 }
