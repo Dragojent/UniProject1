@@ -49,10 +49,11 @@ FAS::User& FAS::User::operator=(const User& user)
 {
     strcpy(name, user.name);
     accessLevel = user.accessLevel;
+    return *this;
 }
 
 std::ostream& FAS::operator<<(std::ostream& out, const FAS::User& sum)
 {
-    std::cout << sum.name << std::endl;
+    std::cout << sum.name;
     return out;
 }

@@ -20,7 +20,8 @@ namespace FAS
             void AddPeople();
             void Edit();
 
-            Photo& operator=(const Photo& item);
+            User& operator[](const unsigned int index);
+            Photo& operator=(const Photo& photo);
         private:
             myArray<User> people;
             char* content;

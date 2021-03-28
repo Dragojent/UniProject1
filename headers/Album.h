@@ -13,7 +13,11 @@ namespace FAS
             Album();
             ~Album();
 
+            myArray<Photo> getPhotos();
             void run();
+
+            Photo& operator[](const unsigned int index);
+            Album& operator=(const Album& album);
         private:
             myArray<Photo> photos;
     };

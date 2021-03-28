@@ -46,6 +46,11 @@ FAS::myArray<FAS::User> FAS::Photo::GetPeople()
     return people;
 }
 
+FAS::User& FAS::Photo::operator[](const unsigned int index)
+{
+    return people[index];
+}
+
 FAS::Photo& FAS::Photo::operator=(const Photo& photo)
 {
     strcpy(m_item_name, photo.m_item_name);

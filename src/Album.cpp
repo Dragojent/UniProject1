@@ -23,7 +23,24 @@ FAS::Album::~Album()
     // delete[] m_item_name;
 }
 
+FAS::myArray<FAS::Photo> FAS::Album::getPhotos()
+{
+    return photos;
+}
+
 void FAS::Album::run()
 {
     //CMenu
+}
+
+FAS::Photo& FAS::Album::operator[](const unsigned int index)
+{
+    return photos[index];
+}
+
+FAS::Album& FAS::Album::operator=(const Album& album)
+{
+    strcpy(m_item_name, album.m_item_name);
+    photos = album.photos;
+    return *this;
 }

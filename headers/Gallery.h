@@ -13,7 +13,11 @@ namespace FAS
             Gallery();
             ~Gallery();
 
+            myArray<Album> getAlbums();
             void run();
+
+            Album& operator[](const unsigned int index);
+            Gallery& operator=(const Gallery& gallery);
         private:
             myArray<Album> albums;
     };

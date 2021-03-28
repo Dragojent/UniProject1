@@ -1,3 +1,4 @@
+#include "Gallery.h"
 #include "Photo.h"
 #include "Album.h"
 #include "MenuItem.h"
@@ -141,5 +142,6 @@ template class FAS::myArray<double>;
 template class FAS::myArray<char*>;
 template class FAS::myArray<FAS::Photo>;
 template class FAS::myArray<FAS::Album>;
+template class FAS::myArray<FAS::Gallery>;
 template class FAS::myArray<FAS::MenuItem>;
 template class FAS::myArray<FAS::User>;
