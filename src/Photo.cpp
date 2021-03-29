@@ -46,6 +46,35 @@ FAS::myArray<FAS::User> FAS::Photo::GetPeople()
     return people;
 }
 
+void FAS::Photo::erase(unsigned int index)
+{
+    people.erase(index);
+}
+
+int FAS::Photo::add(User user)
+{
+    people.push(user);
+    return people.getSize();
+}
+
+FAS::myArray<FAS::User> FAS::Photo::filter(const char* ex)
+{
+    myArray<User> tmparr{};
+    for (FAS::User user : people)
+    {
+        if (strncmp(user.GetName(), ex, strlen(ex)) == 0)
+        {
+            tmparr.push(user);
+        }
+    }
+    return tmparr;
+}
+
+void FAS::Photo::Sort()
+{
+    people.sort();
+}
+
 FAS::User& FAS::Photo::operator[](const unsigned int index)
 {
     return people[index];

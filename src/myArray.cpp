@@ -54,7 +54,7 @@ template <class T>
 void FAS::myArray<T>::place(T data, unsigned int index)
 {
     if (index >= currentSize)
-        throw "Acces Error: out of bounds";
+        throw "Access Error: out of bounds";
     if (currentSize == totalSize)
         allocateMoreMemory();
     currentSize++;
@@ -82,6 +82,35 @@ void FAS::myArray<T>::print()
 }
 
 template <class T>
+void FAS::myArray<T>::swap(int a, int b)
+{
+    T tmp = content[a];
+    content[a] = content[b];
+    content[b] = tmp;
+}
+
+template <class T>
+void FAS::myArray<T>::sort()
+{
+    for (int i = 0; i < currentSize - 1; i++)
+        for (int j = 0; j < currentSize - i - 1; j++)
+            if (content[j] > content[j + 1])
+                this->swap(j, j + 1);
+}
+
+template <class T>
+T FAS::myArray<T>::erase(unsigned int index)
+{
+    if (index >= currentSize)
+        throw "Access error: out of bounds";
+    if (currentSize == 0)
+        throw "Array is empty";
+    this->swap(index, currentSize - 1);
+    return content[--currentSize];
+}
+
+
+template <class T>
 FAS::myArray<T>::~myArray()
 {
     delete[] content;
@@ -103,7 +132,7 @@ template <class T>
 T& FAS::myArray<T>::operator[](const unsigned int index)
 {
     if (index >= currentSize)
-        throw "Acces Error: out of bounds";
+        throw "Access Error: out of bounds";
     return content[index];
 }
 

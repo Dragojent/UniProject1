@@ -1,12 +1,12 @@
 #pragma once
 #include <iostream>
+#include "MenuItem.h"
 
 namespace FAS
 {
-    class User 
+    class User : public MenuItem
     {
         public:
-
             enum class AccessLevel {
                 user = 0,
                 moderator = 1,
@@ -18,17 +18,10 @@ namespace FAS
             User();
             ~User();
 
-            char* GetName();
             AccessLevel GetAccessLevel();
-            void SetName(const char* setTo);
             void SetAccessLevel(AccessLevel setTo);
 
-            User& operator=(const User& user);
-            friend std::ostream& operator<<(std::ostream& out, const User& sum);
         private:
-
-            char* name{}; 
-            AccessLevel accessLevel = AccessLevel::user;
+            AccessLevel accessLevel;
     };
-    std::ostream& operator<<(std::ostream& out, const User& sum);
 }

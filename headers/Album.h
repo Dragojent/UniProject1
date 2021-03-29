@@ -15,6 +15,10 @@ namespace FAS
 
             myArray<Photo> getPhotos();
             void run();
+            void sort();
+            void erase(unsigned int index);
+            int add(Photo photo);
+            myArray<Photo> filter(const char* ex);
 
             Photo& operator[](const unsigned int index);
             Album& operator=(const Album& album);

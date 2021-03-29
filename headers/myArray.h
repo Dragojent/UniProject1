@@ -19,6 +19,9 @@ namespace FAS
         T pop();
         int getSize();
         void print();
+        void swap(int a, int b);
+        void sort();
+        T erase(unsigned int index);
 
         T* begin();
         T* end();

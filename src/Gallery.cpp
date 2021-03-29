@@ -33,6 +33,35 @@ void FAS::Gallery::run()
     //CMenu
 }
 
+void FAS::Gallery::sort()
+{
+    albums.sort();
+}
+
+void FAS::Gallery::erase(unsigned int index)
+{
+    albums.erase(index);
+}
+
+int FAS::Gallery::add(Album album)
+{
+    albums.push(album);
+    return albums.getSize();
+}
+
+FAS::myArray<FAS::Album> FAS::Gallery::filter(const char* ex)
+{
+    myArray<Album> tmparr{};
+    for (FAS::Album album : albums)
+    {
+        if (strncmp(album.GetName(), ex, strlen(ex)) == 0)
+        {
+            tmparr.push(album);
+        }
+    }
+    return tmparr;
+}
+
 FAS::Album& FAS::Gallery::operator[](const unsigned int index)
 {
     return albums[index];
