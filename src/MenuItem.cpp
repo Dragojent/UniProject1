@@ -56,7 +56,7 @@ void FAS::MenuItem::run()
 
 std::ostream& FAS::operator<<(std::ostream& out, const MenuItem& sum)
 {
-    sum.PrintName();
+    std::cout << sum.GetName();
     return out;
 }
 

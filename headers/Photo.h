@@ -22,7 +22,7 @@ namespace FAS
             void Sort();
             void erase(unsigned int index);
             int add(User user);
-            myArray<User> filter(const char* ex);
+            myArray<User*> filter(const char* ex);
 
             User& operator[](const unsigned int index);
             Photo& operator=(const Photo& photo);

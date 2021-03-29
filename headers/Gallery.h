@@ -18,7 +18,7 @@ namespace FAS
             void sort();
             void erase(unsigned int index);
             int add(Album album);
-            myArray<Album> filter(const char* ex);
+            myArray<Album*> filter(const char* ex);
 
             Album& operator[](const unsigned int index);
             Gallery& operator=(const Gallery& gallery);

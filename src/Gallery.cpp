@@ -49,16 +49,12 @@ int FAS::Gallery::add(Album album)
     return albums.getSize();
 }
 
-FAS::myArray<FAS::Album> FAS::Gallery::filter(const char* ex)
+FAS::myArray<FAS::Album*> FAS::Gallery::filter(const char* ex)
 {
-    myArray<Album> tmparr{};
-    for (FAS::Album album : albums)
-    {
+    myArray<Album*> tmparr{};
+    for (FAS::Album &album : albums)
         if (strncmp(album.GetName(), ex, strlen(ex)) == 0)
-        {
-            tmparr.push(album);
-        }
-    }
+            tmparr.push(&album);
     return tmparr;
 }
 

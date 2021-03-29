@@ -44,16 +44,12 @@ int FAS::Album::add(Photo album)
     return photos.getSize();
 }
 
-FAS::myArray<FAS::Photo> FAS::Album::filter(const char* ex)
+FAS::myArray<FAS::Photo*> FAS::Album::filter(const char* ex)
 {
-    myArray<Photo> tmparr{};
-    for (FAS::Photo photo : photos)
-    {
+    myArray<Photo*> tmparr{};
+    for (FAS::Photo &photo : photos)
         if (strncmp(photo.GetName(), ex, strlen(ex)) == 0)
-        {
-            tmparr.push(photo);
-        }
-    }
+            tmparr.push(&photo);
     return tmparr;
 }
 

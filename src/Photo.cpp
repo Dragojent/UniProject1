@@ -57,16 +57,12 @@ int FAS::Photo::add(User user)
     return people.getSize();
 }
 
-FAS::myArray<FAS::User> FAS::Photo::filter(const char* ex)
+FAS::myArray<FAS::User*> FAS::Photo::filter(const char* ex)
 {
-    myArray<User> tmparr{};
-    for (FAS::User user : people)
-    {
+    myArray<User*> tmparr{};
+    for (FAS::User &user : people)
         if (strncmp(user.GetName(), ex, strlen(ex)) == 0)
-        {
-            tmparr.push(user);
-        }
-    }
+            tmparr.push(&user);
     return tmparr;
 }
 
