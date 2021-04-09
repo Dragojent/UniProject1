@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdio>
 #include "myArray.h"
+#include "AbstractItem.h"
 #include "MenuItem.h"
         
 namespace FAS
@@ -10,7 +11,7 @@ namespace FAS
     class CMenu 
     {
         public:
-            CMenu(const char* title, FAS::myArray<FAS::MenuItem> items, std::size_t count);
+            CMenu(const char* title, myArray<MenuItem> items);
             CMenu(CMenu& copy);
             CMenu();
             ~CMenu();
@@ -23,17 +24,18 @@ namespace FAS
             bool IsRunning();
             char* GetTitle();
             size_t GetNumberOfItems();
-            FAS::myArray<FAS::MenuItem> GetItems();
+            myArray<MenuItem> GetItems();
 
-            void print();
             void runCommand();
-            void Start();
+            virtual void print();
+            virtual void Start();
 
-        private:
+        protected:
             int m_select = -1;
             bool m_running = false;
             char* m_title = nullptr;
-            size_t m_count = 0;
-            FAS::myArray<FAS::MenuItem> m_item;
+
+        private:
+            myArray<MenuItem> m_item;
     };
 }

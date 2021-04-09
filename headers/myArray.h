@@ -1,6 +1,7 @@
 #pragma once
+
 #include <iostream>
-#include "MenuItem.h"
+#include "AbstractItem.h"
 #include <initializer_list>
 
 namespace FAS
@@ -10,14 +11,14 @@ namespace FAS
     public:
 
         myArray(std::initializer_list<T> list);
-        myArray(myArray &copy);
+        myArray(const myArray &copy);
         myArray();
         ~myArray();
 
         unsigned int push(T data);
         void place(T data, unsigned int index);
         T pop();
-        int getSize();
+        int getSize() const;
         void print();
         void swap(int a, int b);
         void sort();

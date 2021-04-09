@@ -1,6 +1,7 @@
 #include "Gallery.h"
 #include "Photo.h"
 #include "Album.h"
+#include "AbstractItem.h"
 #include "MenuItem.h"
 #include "myArray.h"
 #include <algorithm>
@@ -25,7 +26,7 @@ FAS::myArray<T>::myArray(std::initializer_list<T> list)
 }
 
 template <class T>
-FAS::myArray<T>::myArray(myArray<T> &copy)
+FAS::myArray<T>::myArray(const myArray<T> &copy)
 {
     content = new T[copy.currentSize];
     std::copy(copy.content, copy.content + copy.currentSize, content);
@@ -66,7 +67,7 @@ void FAS::myArray<T>::place(T data, unsigned int index)
 }
 
 template <class T>
-int FAS::myArray<T>::getSize()
+int FAS::myArray<T>::getSize() const
 {
     return currentSize;
 }
@@ -174,6 +175,6 @@ template class FAS::myArray<FAS::Photo*>;
 template class FAS::myArray<FAS::Album>;
 template class FAS::myArray<FAS::Album*>;
 template class FAS::myArray<FAS::Gallery>;
-template class FAS::myArray<FAS::MenuItem>;
 template class FAS::myArray<FAS::User>;
 template class FAS::myArray<FAS::User*>;
+template class FAS::myArray<FAS::MenuItem>;

@@ -62,40 +62,28 @@ int main()
 
     FAS::Gallery gallery("gallery", albums);
 
-    for (FAS::Album* alPtr : gallery.filter("albu"))
-    {
-        std::cout << *alPtr << std::endl;
-    }
-    system("pause");
+    FAS::MenuItem item1(gallery);
+    FAS::myArray<FAS::MenuItem> arr{};
+    arr.push(item1);
+    arr.push(item1);
+    arr.push(item1);
+
+    FAS::CMenu menu("menu", arr);
+
+    menu.Start();
 
     return 0;
 
-    for (FAS::Album album : gallery.getAlbums())
-        for(FAS::Photo photo : album.getPhotos())
-            for(FAS::User user : photo.GetPeople())
+
+    for (FAS::Album album : gallery.GetItems())
+        for(FAS::Photo photo : album.GetItems())
+            for(FAS::User user : photo.GetItems())
             {
                 gallery.GetName();
                 album.PrintName();
                 photo.PrintName();
                 std::cout << user << "\n------------" << std::endl;
             }
-
-    /*
-
-    //Album.print prototype
-    for (FAS::Photo photo : photos)
-    {
-        photo.PrintName();
-        photo.View();
-        //Photo.printUsers prototype
-        for (FAS::User user : photo.GetPeople())
-        {
-            std::cout << user;
-        }
-        std::cout << "---------" << std::endl;
-    }
-
-    */
 
     system("pause");
 

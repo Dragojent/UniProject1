@@ -1,11 +1,11 @@
 #pragma once
-#include "MenuItem.h"
+#include "AbstractItem.h"
 #include "myArray.h"
 #include "User.h"
 
 namespace FAS
 {
-    class Photo : public MenuItem
+    class Photo : public AbstractItem
     {
         public:
             Photo(const char* name, const char* _content);
@@ -14,8 +14,9 @@ namespace FAS
             Photo();
             ~Photo();
 
+            unsigned int GetSize() const;
             void View();
-            myArray<User> GetPeople();
+            myArray<User> GetItems();
             void SetPeople();
             void AddPeople();
             void Edit();

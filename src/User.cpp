@@ -25,6 +25,12 @@ FAS::User::~User()
     // delete[] name;
 }
 
+unsigned int FAS::User::GetSize() const
+{
+    //
+    return 1;
+}
+
 FAS::User::AccessLevel FAS::User::GetAccessLevel()
 {
     return accessLevel;

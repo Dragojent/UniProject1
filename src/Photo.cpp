@@ -36,12 +36,17 @@ FAS::Photo::~Photo()
     delete[] content;
 }
 
+unsigned int FAS::Photo::GetSize() const
+{
+    return people.getSize();
+}
+
 void FAS::Photo::View()
 {
     std::cout << content << std::endl;
 }
 
-FAS::myArray<FAS::User> FAS::Photo::GetPeople()
+FAS::myArray<FAS::User> FAS::Photo::GetItems()
 {
     return people;
 }

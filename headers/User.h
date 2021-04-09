@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-#include "MenuItem.h"
+#include "AbstractItem.h"
 
 namespace FAS
 {
-    class User : public MenuItem
+    class User : public AbstractItem
     {
         public:
             enum class AccessLevel {
@@ -18,6 +18,7 @@ namespace FAS
             User();
             ~User();
 
+            unsigned int GetSize() const;
             AccessLevel GetAccessLevel();
             void SetAccessLevel(AccessLevel setTo);
 

@@ -23,14 +23,19 @@ FAS::Gallery::~Gallery()
     // delete[] m_item_name;
 }
 
-FAS::myArray<FAS::Album> FAS::Gallery::getAlbums()
+unsigned int FAS::Gallery::GetSize() const
+{
+    return albums.getSize();
+}
+
+FAS::myArray<FAS::Album> FAS::Gallery::GetItems()
 {
     return albums;
 }
 
 void FAS::Gallery::run()
 {
-    //CMenu
+    
 }
 
 void FAS::Gallery::sort()
@@ -69,3 +74,13 @@ FAS::Gallery& FAS::Gallery::operator=(const Gallery& gallery)
     albums = gallery.albums;
     return *this;
 }
+
+// std::istream& FAS::operator>>(std::istream& in, FAS::Gallery& sum)
+// {
+//     FAS::Album tmp{};
+//     char* tmpname{};
+//     in >> tmpname;
+//     tmp.SetName(tmpname);
+//     sum.add(tmp);
+//     return in;
+// }

@@ -23,7 +23,7 @@ FAS::Album::~Album()
     // delete[] m_item_name;
 }
 
-FAS::myArray<FAS::Photo> FAS::Album::getPhotos()
+FAS::myArray<FAS::Photo> FAS::Album::GetItems()
 {
     return photos;
 }
@@ -41,6 +41,11 @@ void FAS::Album::erase(unsigned int index)
 int FAS::Album::add(Photo album)
 {
     photos.push(album);
+    return photos.getSize();
+}
+
+unsigned int FAS::Album::GetSize() const
+{
     return photos.getSize();
 }
 
