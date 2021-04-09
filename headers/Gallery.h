@@ -23,10 +23,10 @@ namespace FAS
 
             Album& operator[](const unsigned int index);
             Gallery& operator=(const Gallery& gallery);
-            // friend std::istream& operator>>(std::istream& in, FAS::Gallery& sum);
+            friend std::istream& operator>>(std::istream& in, Gallery& sum);
 
         private:
             myArray<Album> albums;
     };
-    // std::istream& operator>>(std::istream& in, Gallery sum);
+    std::istream& operator>>(std::istream& in, Gallery& sum);
 }

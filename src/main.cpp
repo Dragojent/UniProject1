@@ -62,28 +62,58 @@ int main()
 
     FAS::Gallery gallery("gallery", albums);
 
-    FAS::MenuItem item1(gallery);
-    FAS::myArray<FAS::MenuItem> arr{};
-    arr.push(item1);
-    arr.push(item1);
-    arr.push(item1);
-
-    FAS::CMenu menu("menu", arr);
-
-    menu.Start();
-
-    return 0;
-
-
-    for (FAS::Album album : gallery.GetItems())
-        for(FAS::Photo photo : album.GetItems())
-            for(FAS::User user : photo.GetItems())
+    std::cout << "Full gallery" << std::endl;
+    for (auto al : gallery.GetItems())
+    {
+        al.PrintName();
+        for (auto ph : al.GetItems())
+        {
+            std::cout << "-";
+            ph.PrintName();
+            for (auto us : ph.GetItems())
             {
-                gallery.GetName();
-                album.PrintName();
-                photo.PrintName();
-                std::cout << user << "\n------------" << std::endl;
+                std::cout << "--";
+                std::cout << us << std::endl;
             }
+            std::cout << "----------" << std::endl;
+        }
+        std::cout << "=============" << std::endl;
+    }
+
+    system("pause");
+    system("cls");
+
+    gallery.sort();
+    std::cout << "Sorted gallery" << std::endl;
+    for (auto al : gallery.GetItems())
+        al.PrintName();
+
+    system("pause");
+    system("cls");
+
+    std::cout << "Filtered using 'alb' key gallery" << std::endl;
+    for (auto* al : gallery.filter("alb"))
+        al->PrintName();
+
+    system("pause");
+    system("cls");
+
+    gallery.erase(0);
+    gallery.erase(0);
+    gallery.erase(0);
+    std::cout << "Gallery after erasing first three albums" << std::endl;
+    for (auto al : gallery.GetItems())
+        al.PrintName();
+
+    system("pause");
+    system("cls");
+
+    std::cout << "Write a name for a new album" << std::endl;
+    std::cin >> gallery;
+
+    std::cout << "Gallery with a new album" << std::endl;
+    for (auto al : gallery.GetItems())
+        al.PrintName();
 
     system("pause");
 

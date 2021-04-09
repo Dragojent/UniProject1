@@ -75,12 +75,13 @@ FAS::Gallery& FAS::Gallery::operator=(const Gallery& gallery)
     return *this;
 }
 
-// std::istream& FAS::operator>>(std::istream& in, FAS::Gallery& sum)
-// {
-//     FAS::Album tmp{};
-//     char* tmpname{};
-//     in >> tmpname;
-//     tmp.SetName(tmpname);
-//     sum.add(tmp);
-//     return in;
-// }
+std::istream& FAS::operator>>(std::istream& in, FAS::Gallery& sum)
+{
+    FAS::Album tmp{};
+    char* tmpname = new char[256];
+    in >> tmpname;
+    tmp.SetName(tmpname);
+    sum.add(tmp);
+    delete[] tmpname;
+    return in;
+}

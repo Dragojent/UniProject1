@@ -27,6 +27,7 @@ namespace FAS
             friend bool operator>(const AbstractItem& mi1, const AbstractItem& mi2);
             friend bool operator==(const AbstractItem& mi1, const AbstractItem& mi2);
             friend bool operator<(const AbstractItem& mi1, const AbstractItem& mi2);
+            friend std::istream& operator>>(std::istream& in, AbstractItem& sum);
  
         protected:
             char* m_item_name = nullptr;
@@ -36,4 +37,5 @@ namespace FAS
     bool operator>(const AbstractItem& mi1, const AbstractItem& mi2);
     bool operator==(const AbstractItem& mi1, const AbstractItem& mi2);
     bool operator<(const AbstractItem& mi1, const AbstractItem& mi2);
+    std::istream& operator>>(std::istream& in, AbstractItem& sum);
 }
