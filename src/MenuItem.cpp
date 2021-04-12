@@ -22,21 +22,21 @@ FAS::MenuItem::~MenuItem()
 
 }
 
-void FAS::MenuItem::run()
-{
-    myArray<MenuItem> arr{};
-    for (int i = 0; i < item->GetSize(); i++)
-    {
-        MenuItem _item(item[i]);
-        arr.push(_item);
-    }
-    CMenu menu(item->GetName(), arr);
-    menu.Start();
-}
+// void FAS::MenuItem::run()
+// {
+//     myArray<MenuItem> arr{};
+//     for (int i = 0; i < item->size(); i++)
+//     {
+//         MenuItem _item(item[i]);
+//         arr.push_back(_item);
+//     }
+//     CMenu menu(item->name(), arr);
+//     menu.Start();
+// }
 
 void FAS::MenuItem::PrintName()
 {
-    item->PrintName();
+    item->name();
 }
 
 FAS::MenuItem& FAS::MenuItem::operator=(const MenuItem& _item)
@@ -52,21 +52,21 @@ FAS::AbstractItem& FAS::MenuItem::operator[](const unsigned int index)
 
 std::ostream& FAS::operator<<(std::ostream& out, const MenuItem& sum)
 {
-    sum.item->PrintName();
+    sum.item->printName();
     return out;
 }
 
 bool FAS::operator>(const MenuItem& mi1, const MenuItem& mi2)
 {
-    return (strcmp(mi1.item->GetName(), mi2.item->GetName()) > 0);
+    return mi1.item->name() > mi2.item->name();
 }
 
 bool FAS::operator==(const MenuItem& mi1, const MenuItem& mi2)
 {
-    return (strcmp(mi1.item->GetName(), mi2.item->GetName()) == 0);
+    return mi1.item->name() == mi2.item->name();
 }
 
 bool FAS::operator<(const MenuItem& mi1, const MenuItem& mi2)
 {
-    return (strcmp(mi1.item->GetName(), mi2.item->GetName()) < 0);
+    return mi1.item->name() < mi2.item->name();
 }

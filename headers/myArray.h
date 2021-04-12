@@ -1,39 +1,42 @@
-#pragma once
+#ifndef MYARRAY_H
+#define MYARRAY_H
 
 #include <iostream>
-#include "AbstractItem.h"
 #include <initializer_list>
 
 namespace FAS
 {
     template <class T>
-    class myArray {
-    public:
+    class myArray 
+    {
+        public:
+            myArray();
+            myArray(std::initializer_list<T> list);
+            myArray(const myArray &copy);
+            ~myArray();
 
-        myArray(std::initializer_list<T> list);
-        myArray(const myArray &copy);
-        myArray();
-        ~myArray();
+            size_t push_back(T data);
+            T pop_back();
+            void insert(T data, size_t index);
+            T erase(size_t index);
+            void swap(int a, int b);
+            void clear();
 
-        unsigned int push(T data);
-        void place(T data, unsigned int index);
-        T pop();
-        int getSize() const;
-        void print();
-        void swap(int a, int b);
-        void sort();
-        T erase(unsigned int index);
+            bool empty() const;
+            size_t size() const;
+            size_t capacity() const;
+            T* begin() const;
+            T* end() const;
 
-        T* begin();
-        T* end();
+            T& operator[](const size_t index) const;
+            myArray& operator=(const myArray &data);
 
-        T& operator[](const unsigned int index);
-        myArray& operator=(const myArray &data);
-
-    private:
-        void allocateMoreMemory();
-        T *content = nullptr;
-        unsigned int currentSize = 0;
-        unsigned int totalSize = 0;
+        private:
+            size_t reserve();
+            T *m_content;
+            size_t m_totalSize;
+            size_t m_currentSize;
     };
 }
+
+#endif

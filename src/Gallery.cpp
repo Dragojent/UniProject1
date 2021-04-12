@@ -1,87 +1,76 @@
 #include <cstring>
 #include "Gallery.h"
 
-FAS::Gallery::Gallery(const char* name, myArray<Album> _albums)
+FAS::Gallery::Gallery(std::string name, myArray<Album*> albums) :
+    m_albums({})
 {
-    strcpy(m_item_name, name);
-    albums = _albums;
+    m_name = name;
+    m_albums = albums;
 }
 
-FAS::Gallery::Gallery(Gallery& copy)
+FAS::Gallery::Gallery(Gallery& copy) :
+    m_albums({})
 {
-    strcpy(m_item_name, copy.m_item_name);
-    albums = copy.albums;
+    m_name = copy.name();
+    m_albums = copy.albums();
 }
 
-FAS::Gallery::Gallery()
-{
-    albums = myArray<Album>();
-}
+FAS::Gallery::Gallery() :
+    m_albums({}) {}
 
-FAS::Gallery::~Gallery()
-{
-    // delete[] m_item_name;
-}
+FAS::Gallery::~Gallery() {}
 
-unsigned int FAS::Gallery::GetSize() const
+FAS::myArray<FAS::Album*> FAS::Gallery::albums() const
 {
-    return albums.getSize();
-}
-
-FAS::myArray<FAS::Album> FAS::Gallery::GetItems()
-{
-    return albums;
-}
-
-void FAS::Gallery::run()
-{
-    
+    return m_albums;
 }
 
 void FAS::Gallery::sort()
 {
-    albums.sort();
+    for (int i = 0; i < m_albums.size() - 1; i++)
+        for (int j = 0; j < m_albums.size() - i - 1; j++)
+            if (m_albums[j] > m_albums[j + 1])
+                m_albums.swap(j, j + 1);
 }
 
-void FAS::Gallery::erase(unsigned int index)
+void FAS::Gallery::eraseAlbum(size_t index)
 {
-    albums.erase(index);
+    m_albums.erase(index);
 }
 
-int FAS::Gallery::add(Album album)
+size_t FAS::Gallery::addAlbum(Album* album)
 {
-    albums.push(album);
-    return albums.getSize();
+    m_albums.push_back(album);
+    return m_albums.size();
 }
 
-FAS::myArray<FAS::Album*> FAS::Gallery::filter(const char* ex)
+FAS::myArray<FAS::Album*> FAS::Gallery::filter(std::string key) const
 {
     myArray<Album*> tmparr{};
-    for (FAS::Album &album : albums)
-        if (strncmp(album.GetName(), ex, strlen(ex)) == 0)
-            tmparr.push(&album);
+    for (auto album : m_albums)
+        if (m_name == key)
+            tmparr.push_back(album);
     return tmparr;
 }
 
-FAS::Album& FAS::Gallery::operator[](const unsigned int index)
+FAS::Album* FAS::Gallery::operator[](const size_t index) const
 {
-    return albums[index];
+    return m_albums[index];
 }
 
 FAS::Gallery& FAS::Gallery::operator=(const Gallery& gallery)
 {
-    strcpy(m_item_name, gallery.m_item_name);
-    albums = gallery.albums;
+    m_name = gallery.name();
+    m_albums = gallery.albums();
     return *this;
 }
 
-std::istream& FAS::operator>>(std::istream& in, FAS::Gallery& sum)
-{
-    FAS::Album tmp{};
-    char* tmpname = new char[256];
-    in >> tmpname;
-    tmp.SetName(tmpname);
-    sum.add(tmp);
-    delete[] tmpname;
-    return in;
-}
+// std::istream& FAS::operator>>(std::istream& in, FAS::Gallery& sum)
+// {
+//     FAS::Album tmp{};
+//     std::string tmpname{};
+//     in >> tmpname;
+//     tmp.setName(tmpname);
+//     sum.addAlbum(&tmp);
+//     return in;
+// }

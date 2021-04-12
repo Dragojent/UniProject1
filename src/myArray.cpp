@@ -9,167 +9,156 @@
 #include <iterator>
 
 template<class T>
-FAS::myArray<T>::myArray()
+FAS::myArray<T>::myArray() :
+    m_content(new T[1]) {}
+
+template <class T>
+FAS::myArray<T>::myArray(std::initializer_list<T> list) :
+    m_content(new T[list.size()]), m_totalSize(list.size()), m_currentSize(list.size())
 {
-    content = new T[1];
-    totalSize = 1;
-    currentSize = 0;
+    std::copy(list.begin(), list.end(), m_content);
 }
 
 template <class T>
-FAS::myArray<T>::myArray(std::initializer_list<T> list)
+FAS::myArray<T>::myArray(const myArray<T> &copy) :
+    m_content(new T[copy.size()]), m_currentSize(copy.size()), m_totalSize(copy.capacity())
 {
-    content = new T[list.size()];
-    std::copy(list.begin(), list.end(), content);
-    totalSize = list.size();
-    currentSize = list.size();
+    std::copy(copy.begin(), copy.end(), m_content);
 }
 
 template <class T>
-FAS::myArray<T>::myArray(const myArray<T> &copy)
+FAS::myArray<T>::~myArray()
 {
-    content = new T[copy.currentSize];
-    std::copy(copy.content, copy.content + copy.currentSize, content);
-    currentSize = copy.currentSize;
-    totalSize = copy.totalSize;
+    delete[] m_content;
 }
 
 template <class T>
-unsigned int FAS::myArray<T>::push(T data)
+size_t FAS::myArray<T>::push_back(T data)
 {
-    if (currentSize == totalSize)
-        allocateMoreMemory();
-    content[currentSize++] = data;
-    return currentSize;
+    if (m_currentSize == m_totalSize)
+        reserve();
+    m_content[m_currentSize++] = data;
+    return m_currentSize;
 }
 
 template <class T>
-T FAS::myArray<T>::pop()
+T FAS::myArray<T>::pop_back()
 {
-    if (currentSize == 0)
+    if (m_currentSize == 0)
         throw "Array is empty";
-    return content[--currentSize];
+    return m_content[--m_currentSize];
 }
 
 template <class T>
-void FAS::myArray<T>::place(T data, unsigned int index)
+void FAS::myArray<T>::insert(T data, size_t index)
 {
-    if (index >= currentSize)
+    if (index >= m_currentSize)
         throw "Access Error: out of bounds";
-    if (currentSize == totalSize)
-        allocateMoreMemory();
-    currentSize++;
-    for (int i = currentSize - 1; i > index; i--)
+    if (m_currentSize == m_totalSize)
+        reserve();
+    m_currentSize++;
+    for (int i = m_currentSize - 1; i > index; i--)
     {
-        content[i] = content[i - 1];
+        m_content[i] = m_content[i - 1];
     }
-    content[index] = data;
+    m_content[index] = data;
 }
 
 template <class T>
-int FAS::myArray<T>::getSize() const
+T FAS::myArray<T>::erase(size_t index)
 {
-    return currentSize;
-}
-
-template <class T>
-void FAS::myArray<T>::print()
-{
-    for (int i = 0; i < currentSize; i++)
-    {
-        std::cout << content[i] << " ";
-    }
-    std::cout << std::endl;
+    if (index >= m_currentSize)
+        throw "Access error: out of bounds";
+    if (m_currentSize == 0)
+        throw "Array is empty";
+    swap(index, m_currentSize - 1);
+    return m_content[--m_currentSize];
 }
 
 template <class T>
 void FAS::myArray<T>::swap(int a, int b)
 {
-    T tmp = content[a];
-    content[a] = content[b];
-    content[b] = tmp;
+    T tmp = m_content[a];
+    m_content[a] = m_content[b];
+    m_content[b] = tmp;
 }
 
 template <class T>
-void FAS::myArray<T>::sort()
+void FAS::myArray<T>::clear()
 {
-    for (int i = 0; i < currentSize - 1; i++)
-        for (int j = 0; j < currentSize - i - 1; j++)
-            if (content[j] > content[j + 1])
-                this->swap(j, j + 1);
+    delete[] m_content;
+    m_content = new T[1];
+    m_currentSize = 0;
+    m_totalSize = 1;
 }
 
 template <class T>
-T FAS::myArray<T>::erase(unsigned int index)
+bool FAS::myArray<T>::empty() const
 {
-    if (index >= currentSize)
-        throw "Access error: out of bounds";
-    if (currentSize == 0)
-        throw "Array is empty";
-    this->swap(index, currentSize - 1);
-    return content[--currentSize];
-}
-
-
-template <class T>
-FAS::myArray<T>::~myArray()
-{
-    delete[] content;
+    return !m_currentSize;
 }
 
 template <class T>
-T* FAS::myArray<T>::begin()
+size_t FAS::myArray<T>::size() const
 {
-    return &content[0];
+    return m_currentSize;
 }
 
 template <class T>
-T* FAS::myArray<T>::end()
+size_t FAS::myArray<T>::capacity() const
 {
-    return &content[currentSize];
+    return m_totalSize;
 }
 
 template <class T>
-T& FAS::myArray<T>::operator[](const unsigned int index)
+T* FAS::myArray<T>::begin() const
 {
-    if (index >= currentSize)
+    return &m_content[0];
+}
+
+template <class T>
+T* FAS::myArray<T>::end() const
+{
+    return &m_content[m_currentSize];
+}
+
+template <class T>
+T& FAS::myArray<T>::operator[](const size_t index) const
+{
+    if (index >= m_currentSize)
         throw "Access Error: out of bounds";
-    return content[index];
+    return m_content[index];
 }
 
 template <class T>
 FAS::myArray<T>& FAS::myArray<T>::operator=(const FAS::myArray<T> &data)
 {
-    if (data.content == nullptr)
+    if (data.m_content == nullptr)
         throw "Access Error: null reference";
-    if (currentSize < data.currentSize)
-    {
-        T* old = content;
-        content = new T[data.currentSize];
-        std::copy(old, old + currentSize, content);
-        delete[] old;
-    }
-    std::copy(data.content, data.content + data.currentSize, content);
-    currentSize = data.currentSize;
-    totalSize = data.totalSize;
+    delete[] m_content;
+    m_content = new T[data.size()];
+    std::copy(data.begin(), data.end(), m_content);
+    m_currentSize = data.size();
+    m_totalSize = data.capacity();
     return *this;
 }
 
 template <class T>
-void FAS::myArray<T>::allocateMoreMemory()
+size_t FAS::myArray<T>::reserve()
 {
-    T* old = content;
-    content = new T[totalSize*=2];
-    std::copy(old, old + currentSize, content);
+    T* old = m_content;
+    m_content = new T[m_totalSize*=2];
+    std::copy(old, old + m_currentSize, m_content);
     delete[] old;
+    return m_totalSize;
 }
-
 
 template class FAS::myArray<int>;
 template class FAS::myArray<float>;
 template class FAS::myArray<char>;
 template class FAS::myArray<double>;
 template class FAS::myArray<char*>;
+template class FAS::myArray<size_t>;
 template class FAS::myArray<FAS::Photo>;
 template class FAS::myArray<FAS::Photo*>;
 template class FAS::myArray<FAS::Album>;

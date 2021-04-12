@@ -10,19 +10,18 @@ namespace FAS
             enum class AccessLevel {
                 user = 0,
                 moderator = 1,
-                admin = 2
+                administrator = 2
             };
             
-            User(const char* _name, AccessLevel aL);
+            User(std::string name, AccessLevel AL);
             User(User& copy);
             User();
             ~User();
 
-            unsigned int GetSize() const;
-            AccessLevel GetAccessLevel();
-            void SetAccessLevel(AccessLevel setTo);
+            AccessLevel accessLevel() const;
+            void SetAccessLevel(AccessLevel AL); 
 
         private:
-            AccessLevel accessLevel;
+            AccessLevel m_accessLevel;
     };
 }

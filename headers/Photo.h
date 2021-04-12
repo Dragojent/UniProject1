@@ -1,34 +1,38 @@
-#pragma once
+#ifndef PHOTO_H
+#define PHOTO_H
+
 #include "AbstractItem.h"
-#include "myArray.h"
 #include "User.h"
+#include "myArray.h"
 
 namespace FAS
 {
     class Photo : public AbstractItem
     {
         public:
-            Photo(const char* name, const char* _content);
-            Photo(const char* name, const char* _content, myArray<User> _people);
+            Photo(std::string name, std::string content);
+            Photo(std::string name, std::string content, myArray<User*> people);
             Photo(Photo& copy);
             Photo();
             ~Photo();
 
-            unsigned int GetSize() const;
-            void View();
-            myArray<User> GetItems();
-            void SetPeople();
-            void AddPeople();
-            void Edit();
-            void Sort();
-            void erase(unsigned int index);
-            int add(User user);
-            myArray<User*> filter(const char* ex);
+            void view() const;
+            std::string content() const;
+            void edit(std::string photo);
 
-            User& operator[](const unsigned int index);
+            void eraseUser(size_t index);
+            size_t addUser(User* user);
+            void setPeople(myArray<User*> people);
+            myArray<User*> filter(std::string key) const;
+            myArray<User*> people() const;
+            void sort();
+
+            User* operator[](const size_t index) const;
             Photo& operator=(const Photo& photo);
         private:
-            myArray<User> people;
-            char* content;
+            myArray<User*> m_people;
+            std::string m_content;
     };
 }
+
+#endif

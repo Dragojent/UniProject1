@@ -1,42 +1,29 @@
 #include "User.h"
 #include <string.h>
 
-FAS::User::User(const char* _name, AccessLevel aL)
+FAS::User::User(std::string name, AccessLevel AL)
 {
-    m_item_name = new char[512];
-    strcpy(m_item_name, _name);
-    accessLevel = aL;
+    m_name = name;
+    m_accessLevel = AL;
 }
 
 FAS::User::User(FAS::User& copy)
 {
-    m_item_name = new char[512];
-    strcpy(m_item_name, copy.m_item_name);
-    accessLevel = copy.accessLevel;
+    m_name = copy.name();
+    m_accessLevel = copy.accessLevel();
 }
 
-FAS::User::User()
+FAS::User::User() :
+    m_accessLevel(AccessLevel::user) {}
+
+FAS::User::~User() {} 
+
+FAS::User::AccessLevel FAS::User::accessLevel() const
 {
-    m_item_name = new char[512];
+    return m_accessLevel;
 }
 
-FAS::User::~User()
+void FAS::User::SetAccessLevel(AccessLevel AL)
 {
-    // delete[] name;
-}
-
-unsigned int FAS::User::GetSize() const
-{
-    //
-    return 1;
-}
-
-FAS::User::AccessLevel FAS::User::GetAccessLevel()
-{
-    return accessLevel;
-}
-
-void FAS::User::SetAccessLevel(AccessLevel setTo)
-{
-    accessLevel = setTo;
+    m_accessLevel = AL;
 }

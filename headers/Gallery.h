@@ -8,25 +8,23 @@ namespace FAS
     class Gallery : public AbstractItem
     {
         public:
-            Gallery(const char* name, myArray<Album> _albums);
+            Gallery(std::string name, myArray<Album*> albums);
             Gallery(Gallery& copy);
             Gallery();
             ~Gallery();
 
-            unsigned int GetSize() const;
-            myArray<Album> GetItems();
-            void run();
+            void eraseAlbum(size_t index);
+            size_t addAlbum(Album* album);
+            myArray<Album*> filter(std::string key) const;
+            myArray<Album*> albums() const;
             void sort();
-            void erase(unsigned int index);
-            int add(Album album);
-            myArray<Album*> filter(const char* ex);
 
-            Album& operator[](const unsigned int index);
+            Album* operator[](const size_t index) const;
             Gallery& operator=(const Gallery& gallery);
-            friend std::istream& operator>>(std::istream& in, Gallery& sum);
+            // friend std::istream& operator>>(std::istream& in, Gallery& sum);
 
         private:
-            myArray<Album> albums;
+            myArray<Album*> m_albums;
     };
-    std::istream& operator>>(std::istream& in, Gallery& sum);
+    // std::istream& operator>>(std::istream& in, Gallery& sum);
 }

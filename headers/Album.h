@@ -8,22 +8,20 @@ namespace FAS
     class Album : public AbstractItem
     {
         public:
-            Album(const char* name, myArray<Photo> _photos);
+            Album(std::string name, myArray<Photo*> photos);
             Album(Album& copy);
             Album();
             ~Album();
 
-            unsigned int GetSize() const;
-            myArray<Photo> GetItems();
-            void run();
+            void erasePhoto(size_t index);
+            size_t addPhoto(Photo* photo);
+            myArray<Photo*> filter(std::string key) const;
+            myArray<Photo*> photos() const;
             void sort();
-            void erase(unsigned int index);
-            int add(Photo photo);
-            myArray<Photo*> filter(const char* ex);
 
-            Photo& operator[](const unsigned int index);
+            Photo* operator[](const size_t index) const;
             Album& operator=(const Album& album);
         private:
-            myArray<Photo> photos;
+            myArray<Photo*> m_photos;
     };
 }

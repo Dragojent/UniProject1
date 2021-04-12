@@ -1,90 +1,94 @@
 #include <cstring>
 #include "Photo.h"
 
-FAS::Photo::Photo(const char* name, const char* _content)
+FAS::Photo::Photo(std::string name, std::string content) :
+    m_content({})
 {
-    strcpy(m_item_name, name);
-    content = new char[256];
-    strcpy(content, _content);
-    people = myArray<User>();
+    m_name = name;
+    m_content = content;
 }
 
-FAS::Photo::Photo(const char* name, const char* _content, myArray<User> _people)
+FAS::Photo::Photo(std::string name, std::string content, myArray<User*> people) :
+    m_content({})
 {
-    strcpy(m_item_name, name);
-    content = new char[256];
-    strcpy(content, _content);
-    people = _people;
+    m_name = name;
+    m_content = content;
+    m_people = people;
 }
 
-FAS::Photo::Photo(Photo& copy)
+FAS::Photo::Photo(Photo& copy) :
+    m_content({})
 {
-    strcpy(m_item_name, copy.m_item_name);
-    content = new char[256];
-    strcpy(content, copy.content);
-    people = copy.people;
+    m_name = copy.name();
+    m_content = copy.content();
+    m_people = copy.people();
 }
 
-FAS::Photo::Photo()
+FAS::Photo::Photo() : m_content({}) {}
+
+FAS::Photo::~Photo() {}
+
+void FAS::Photo::view() const
 {
-    content = new char[256];
-    people = myArray<User>();
+    std::cout << m_content << std::endl;
 }
 
-FAS::Photo::~Photo()
+std::string FAS::Photo::content() const
 {
-    delete[] content;
+    return m_content;
 }
 
-unsigned int FAS::Photo::GetSize() const
+void FAS::Photo::edit(std::string photo)
 {
-    return people.getSize();
+    m_content = photo;
 }
 
-void FAS::Photo::View()
+void FAS::Photo::eraseUser(size_t index)
 {
-    std::cout << content << std::endl;
+    m_people.erase(index);
 }
 
-FAS::myArray<FAS::User> FAS::Photo::GetItems()
+size_t FAS::Photo::addUser(User* user)
 {
-    return people;
+    return m_people.push_back(user);
 }
 
-void FAS::Photo::erase(unsigned int index)
+void FAS::Photo::setPeople(myArray<User*> people)
 {
-    people.erase(index);
+    m_people = people;
 }
 
-int FAS::Photo::add(User user)
-{
-    people.push(user);
-    return people.getSize();
-}
-
-FAS::myArray<FAS::User*> FAS::Photo::filter(const char* ex)
+FAS::myArray<FAS::User*> FAS::Photo::filter(std::string key) const
 {
     myArray<User*> tmparr{};
-    for (FAS::User &user : people)
-        if (strncmp(user.GetName(), ex, strlen(ex)) == 0)
-            tmparr.push(&user);
+    for (auto user : m_people)
+        if (user->name() == key)
+            tmparr.push_back(user);
     return tmparr;
 }
 
-void FAS::Photo::Sort()
+FAS::myArray<FAS::User*> FAS::Photo::people() const
 {
-    people.sort();
+    return m_people;
 }
 
-FAS::User& FAS::Photo::operator[](const unsigned int index)
+void FAS::Photo::sort()
 {
-    return people[index];
+    for (int i = 0; i < m_people.size() - 1; i++)
+        for (int j = 0; j < m_people.size() - i - 1; j++)
+            if (m_people[j] > m_people[j + 1])
+                m_people.swap(j, j + 1);
+}
+
+FAS::User* FAS::Photo::operator[](const size_t index) const
+{
+    return m_people[index];
 }
 
 FAS::Photo& FAS::Photo::operator=(const Photo& photo)
-{
-    strcpy(m_item_name, photo.m_item_name);
-    strcpy(content, photo.content);
-    people = photo.people;
+{   
+    m_name = photo.name();
+    m_ID =  photo.ID();
+    m_people =  photo.people();
     return *this;
 }

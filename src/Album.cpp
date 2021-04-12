@@ -1,76 +1,66 @@
 #include <cstring>
 #include "Album.h"
 
-FAS::Album::Album(const char* name, myArray<Photo> _photos)
+FAS::Album::Album(std::string name, myArray<Photo*> photos) :
+    m_photos({})
 {
-    strcpy(m_item_name, name);
-    photos = _photos;
+    m_name = name;
+    m_photos = photos;
 }
 
-FAS::Album::Album(Album& copy)
+FAS::Album::Album(Album& copy) :
+    m_photos({})
 {
-    strcpy(m_item_name, copy.m_item_name);
-    photos = copy.photos;
+    m_name = copy.name();
+    m_photos = copy.photos();
 }
 
-FAS::Album::Album()
+FAS::Album::Album() :
+    m_photos({}) {}
+
+FAS::Album::~Album() {}
+
+FAS::myArray<FAS::Photo*> FAS::Album::photos() const
 {
-    photos = myArray<Photo>();
+    return m_photos;
 }
 
-FAS::Album::~Album()
+void FAS::Album::erasePhoto(size_t index)
 {
-    // delete[] m_item_name;
+    m_photos.erase(index);
 }
 
-FAS::myArray<FAS::Photo> FAS::Album::GetItems()
+size_t FAS::Album::addPhoto(Photo* photo)
 {
-    return photos;
+    m_photos.push_back(photo);
+    return m_photos.size();
 }
 
-void FAS::Album::run()
-{
-    //CMenu
-}
-
-void FAS::Album::erase(unsigned int index)
-{
-    photos.erase(index);
-}
-
-int FAS::Album::add(Photo album)
-{
-    photos.push(album);
-    return photos.getSize();
-}
-
-unsigned int FAS::Album::GetSize() const
-{
-    return photos.getSize();
-}
-
-FAS::myArray<FAS::Photo*> FAS::Album::filter(const char* ex)
+FAS::myArray<FAS::Photo*> FAS::Album::filter(std::string key) const
 {
     myArray<Photo*> tmparr{};
-    for (FAS::Photo &photo : photos)
-        if (strncmp(photo.GetName(), ex, strlen(ex)) == 0)
-            tmparr.push(&photo);
+    for (auto photo : m_photos)
+        if (photo->name() == key)
+            tmparr.push_back(photo);
     return tmparr;
 }
 
 void FAS::Album::sort()
 {
-    photos.sort();
+    for (int i = 0; i < m_photos.size() - 1; i++)
+        for (int j = 0; j < m_photos.size() - i - 1; j++)
+            if (m_photos[j] > m_photos[j + 1])
+                m_photos.swap(j, j + 1);
 }
 
-FAS::Photo& FAS::Album::operator[](const unsigned int index)
+FAS::Photo* FAS::Album::operator[](const size_t index) const
 {
-    return photos[index];
+    return m_photos[index];
 }
 
 FAS::Album& FAS::Album::operator=(const Album& album)
 {
-    strcpy(m_item_name, album.m_item_name);
-    photos = album.photos;
+    m_name = album.name();
+    m_photos = album.photos();
     return *this;
 }

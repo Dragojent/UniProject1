@@ -5,14 +5,14 @@
 
 FAS::CMenu::CMenu(const char* title, FAS::myArray<FAS::MenuItem> items)
 {
-    m_title = new char[sizeof(FAS::MenuItem) * items.getSize() + 256]{};
+    m_title = new char[sizeof(FAS::MenuItem) * items.size() + 256]{};
     strcpy(m_title, title);
     m_item = items;
 }
 
 FAS::CMenu::CMenu(CMenu& copy)
 {
-    m_title = new char[sizeof(FAS::MenuItem) * copy.GetItems().getSize() + 256]{};
+    m_title = new char[sizeof(FAS::MenuItem) * copy.GetItems().size() + 256]{};
     strcpy(m_title, copy.m_title);
     m_item = copy.m_item;
     m_select = copy.m_select;
@@ -45,7 +45,7 @@ char* FAS::CMenu::GetTitle()
 
 size_t FAS::CMenu::GetNumberOfItems()
 {
-    return m_item.getSize();
+    return m_item.size();
 }
 
 FAS::myArray<FAS::MenuItem> FAS::CMenu::GetItems()
@@ -55,7 +55,7 @@ FAS::myArray<FAS::MenuItem> FAS::CMenu::GetItems()
 
 void FAS::CMenu::print()
 {
-    for (int i = 0; i < m_item.getSize(); i++)
+    for (int i = 0; i < m_item.size(); i++)
     {
         if (i == m_select)
         {
@@ -91,7 +91,7 @@ void FAS::CMenu::Start()
 
         case 32:
             system("cls");
-            this->runCommand();
+            // this->runCommand();
             break;
 
         default:
@@ -100,10 +100,10 @@ void FAS::CMenu::Start()
     }
 }
 
-void FAS::CMenu::runCommand()
-{
-    m_item[m_select].run();
-}
+// void FAS::CMenu::runCommand()
+// {
+//     m_item[m_select].run();
+// }
 
 void FAS::CMenu::SetRunning(bool setTo)
 {
@@ -112,7 +112,7 @@ void FAS::CMenu::SetRunning(bool setTo)
 
 void FAS::CMenu::SetSelect(int setTo)
 {
-    if (setTo < m_item.getSize() && setTo >= 0)
+    if (setTo < m_item.size() && setTo >= 0)
         m_select = setTo;
 }
 
@@ -120,7 +120,7 @@ void FAS::CMenu::MoveSelect(int shift)
 {
     m_select += shift;
     if (m_select < 0)
-        m_select += m_item.getSize();
-    else if (m_select >= m_item.getSize())
-        m_select -= m_item.getSize();
+        m_select += m_item.size();
+    else if (m_select >= m_item.size())
+        m_select -= m_item.size();
 }
